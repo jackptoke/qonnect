@@ -1,0 +1,24 @@
+<div class="container jumbotron">
+<p>
+  <strong>Street address:</strong>
+  <%= @address.street_address %>
+</p>
+
+<p>
+  <strong>Suburb:</strong>
+  <%= @address.suburb %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @address.state %>
+</p>
+
+<p>
+  <strong>Postcode:</strong>
+  <%= @address.postcode %>
+</p>
+
+<%= link_to 'Edit', edit_address_path(@address) %> |
+<%= link_to 'Back', addresses_path %>
+</div>

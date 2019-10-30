@@ -1,0 +1,15 @@
+    <ul class="topnav">
+        <li>
+            <a class="navbar-brand nav-logo" href="#">QONNECT</a>  
+        </li>
+        <% if interpreter_signed_in? %>
+        <li class="right">
+            <%= link_to "logout", destroy_interpreter_session_path, method: :delete %>
+        </li>
+        <% else %>
+        <li class="right">
+            <%= link_to "Interpreter login", new_interpreter_session_path,  class: "active"%>
+        </li>
+        <% end %>
+    </ul>
+ 

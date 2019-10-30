@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+  <ul class="navbar-nav">
+    <% if current_interpreter && Address.find_by_interpreter_id(current_interpreter.id).nil? %>
+    <li class="nav-item">
+      <%= link_to 'Add an address', "/addresses/new", class: "nav-link" %>
+    </li>
+    <% end %>
+    <li class="nav-item">
+      <%= link_to 'Available jobs', "/interpreters", class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Current jobs', "/interpreters", class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'My availability', "/interpreters", class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'My language', "/interpreters", class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'My address', current_interpreter.address, class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Personal detail', edit_interpreter_registration_path(current_interpreter), class: "nav-link" %>
+    </li>
+  </ul>
+</nav>

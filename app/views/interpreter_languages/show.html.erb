@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Interpreter:</strong>
+  <%= @interpreter_language.interpreter_id %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @interpreter_language.language_id %>
+</p>
+
+<%= link_to 'Edit', edit_interpreter_language_path(@interpreter_language) %> |
+<%= link_to 'Back', interpreter_languages_path %>
