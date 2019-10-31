@@ -13,13 +13,6 @@ class InterpreterLanguagesController < ApplicationController
     end
   end
 
-  # def add_my_language
-  #   if current_interpreter
-  #     @interpreter = current_interpreter
-  #     @my_new_language = InterpreterLanguage.where(interpreter_id: current_interpreter.id)
-  #   end
-  # end
-
   # GET /interpreter_languages/1
   # GET /interpreter_languages/1.json
   def show

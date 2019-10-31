@@ -10,11 +10,9 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field"> 
     <%= form.hidden_field :interpreter_id, value: @interpreter.id, readonly: true %>
   </div>
-
   <div class="field">
     <%= form.label :dialect_id %>
      <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).all.map{|d| [d.dialect_name, d.id]}, :prompt => "Select One" %>
