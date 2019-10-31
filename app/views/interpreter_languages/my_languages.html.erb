@@ -1,5 +1,5 @@
 <div class="container jumbotron">
-<table class="table-striped">
+<table class="table-bordered table-dark table-striped">
   <thead>
     <tr>
       <th>Language</th>
@@ -8,11 +8,14 @@
   </thead>
 
   <tbody>
-    <% @my_languages.each do |language| %>
+    <% @my_dialects.each do |my_dialect| %>
       <tr>
-        <td>language.dialect.language.language_name</td><td><%= language.dialect_name %></td>
+        <td><%= my_dialect.dialect.language.language_name %></td>
+        <td><%= my_dialect.dialect.dialect_name %></td>
+        <td><%= link_to 'Delete', my_dialect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= link_to 'Add a language', new_interpreter_language_path %>
 </div>

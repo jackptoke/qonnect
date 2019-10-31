@@ -15,10 +15,10 @@
     <% @interpreter_languages.each do |interpreter_language| %>
       <tr>
         <td><%= interpreter_language.interpreter_id %></td>
-        <td><%= interpreter_language.language_id %></td>
+        <td><%= interpreter_language.dialect_id %></td>
         <td><%= link_to 'Show', interpreter_language %></td>
         <td><%= link_to 'Edit', edit_interpreter_language_path(interpreter_language) %></td>
-        <td><%= link_to 'Destroy', interpreter_language, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', interpreter_language, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

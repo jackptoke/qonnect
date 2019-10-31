@@ -17,7 +17,6 @@
     <%= form.label :dialect_id %>
      <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).all.map{|d| [d.dialect_name, d.id]}, :prompt => "Select One" %>
   </div>
-
   <div class="actions">
     <%= form.submit "Add", class: 'btn btn-primary' %>
   </div>

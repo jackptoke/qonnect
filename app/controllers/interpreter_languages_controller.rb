@@ -9,7 +9,7 @@ class InterpreterLanguagesController < ApplicationController
 
   def my_languages
     if current_interpreter
-      @my_languages = InterpreterLanguage.where(interpreter_id: current_interpreter.id)
+      @my_dialects = InterpreterLanguage.where(interpreter_id: current_interpreter.id)
     end
   end
 
@@ -64,7 +64,7 @@ class InterpreterLanguagesController < ApplicationController
   def destroy
     @interpreter_language.destroy
     respond_to do |format|
-      format.html { redirect_to interpreter_languages_url, notice: 'Interpreter language was successfully destroyed.' }
+      format.html { redirect_to my_languages_path, notice: 'Interpreter language was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
