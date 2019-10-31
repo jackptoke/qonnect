@@ -1,5 +1,8 @@
+<div class="container jumbotron">
 <h1>New Dialect</h1>
 
 <%= render 'form', dialect: @dialect %>
 
-<%= link_to 'Back', dialects_path %>
+<%= link_to 'Back', dialects_path,  class: 'btn btn-primary' %>
+<%= link_to 'Add Language', new_language_path,  class: 'btn btn-primary' %>
+</div>

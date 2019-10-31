@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :language_id %>
-    <%= form.text_field :language_id %>
+    <%= form.select :language_id, Language.all.map{|l| [l.language_name, l.id]}, :prompt => "Select One" %>
   </div>
 
   <div class="actions">

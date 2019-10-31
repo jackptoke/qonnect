@@ -7,6 +7,19 @@ class InterpreterLanguagesController < ApplicationController
     @interpreter_languages = InterpreterLanguage.all
   end
 
+  def my_languages
+    if current_interpreter
+      @my_languages = InterpreterLanguage.where(interpreter_id: current_interpreter.id)
+    end
+  end
+
+  # def add_my_language
+  #   if current_interpreter
+  #     @interpreter = current_interpreter
+  #     @my_new_language = InterpreterLanguage.where(interpreter_id: current_interpreter.id)
+  #   end
+  # end
+
   # GET /interpreter_languages/1
   # GET /interpreter_languages/1.json
   def show
@@ -15,6 +28,8 @@ class InterpreterLanguagesController < ApplicationController
   # GET /interpreter_languages/new
   def new
     @interpreter_language = InterpreterLanguage.new
+    @interpreter = current_interpreter
+    # byebug
   end
 
   # GET /interpreter_languages/1/edit
@@ -25,10 +40,10 @@ class InterpreterLanguagesController < ApplicationController
   # POST /interpreter_languages.json
   def create
     @interpreter_language = InterpreterLanguage.new(interpreter_language_params)
-
+    # byebug
     respond_to do |format|
       if @interpreter_language.save
-        format.html { redirect_to @interpreter_language, notice: 'Interpreter language was successfully created.' }
+        format.html { redirect_to my_languages_path, notice: 'Interpreter language was successfully created.' }
         format.json { render :show, status: :created, location: @interpreter_language }
       else
         format.html { render :new }
@@ -65,10 +80,11 @@ class InterpreterLanguagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_interpreter_language
       @interpreter_language = InterpreterLanguage.find(params[:id])
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interpreter_language_params
-      params.require(:interpreter_language).permit(:interpreter_id, :language_id)
+      params.require(:interpreter_language).permit(:interpreter_id, :dialect_id)
     end
 end

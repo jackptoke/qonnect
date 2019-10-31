@@ -1,6 +1,8 @@
+<div class="container jumbotron">
 <h1>Editing Dialect</h1>
 
 <%= render 'form', dialect: @dialect %>
 
-<%= link_to 'Show', @dialect %> |
-<%= link_to 'Back', dialects_path %>
+<%= link_to 'Show', @dialect, class: 'btn btn-primary' %> |
+<%= link_to 'Back', dialects_path, class: 'btn btn-primary' %>
+</div>

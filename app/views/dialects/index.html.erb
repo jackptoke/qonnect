@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<div class="container jumbotron">
 <h1>Dialects</h1>
 
 <table>
@@ -15,10 +15,10 @@
     <% @dialects.each do |dialect| %>
       <tr>
         <td><%= dialect.dialect_name %></td>
-        <td><%= dialect.language_id %></td>
-        <td><%= link_to 'Show', dialect %></td>
-        <td><%= link_to 'Edit', edit_dialect_path(dialect) %></td>
-        <td><%= link_to 'Destroy', dialect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= dialect.language.language_name %></td>
+        <td><%= link_to 'Show', dialect, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Edit', edit_dialect_path(dialect), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', dialect, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,5 @@
 
 <br>
 
-<%= link_to 'New Dialect', new_dialect_path %>
+<%= link_to 'New Dialect', new_dialect_path, class: 'btn btn-primary' %>
+</div>

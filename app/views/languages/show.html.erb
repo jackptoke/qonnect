@@ -1,9 +1,34 @@
 <p id="notice"><%= notice %></p>
-
+<div class="container jumbotron">
 <p>
   <strong>Language name:</strong>
   <%= @language.language_name %>
 </p>
 
-<%= link_to 'Edit', edit_language_path(@language) %> |
-<%= link_to 'Back', languages_path %>
+<table class="table-striped">
+  <thead>
+    <tr>
+      <th>Language name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @language.dialects.each do |dialect| %>
+      <tr>
+        <td><%= dialect.dialect_name %></td>
+        <td><%= link_to 'Show', dialect, class: 'btn btn-primary'  %></td>
+        <td><%= link_to 'Edit', edit_dialect_path(dialect), class: 'btn btn-primary'  %></td>
+        <td><%= link_to 'Destroy', dialect, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary'  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dialect', new_dialect_path, class: 'btn btn-primary' %> | 
+<%= link_to 'Edit', edit_language_path(@language), class: 'btn btn-primary' %> |
+<%= link_to 'Back', languages_path, class: 'btn btn-primary' %>
+
+</div>

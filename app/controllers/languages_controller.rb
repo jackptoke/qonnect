@@ -15,10 +15,12 @@ class LanguagesController < ApplicationController
   # GET /languages/new
   def new
     @language = Language.new
+    # @language.dialect = Dialect.new
   end
 
   # GET /languages/1/edit
   def edit
+    # byebug
   end
 
   # POST /languages
@@ -40,6 +42,7 @@ class LanguagesController < ApplicationController
   # PATCH/PUT /languages/1
   # PATCH/PUT /languages/1.json
   def update
+    
     respond_to do |format|
       if @language.update(language_params)
         format.html { redirect_to @language, notice: 'Language was successfully updated.' }
@@ -69,6 +72,6 @@ class LanguagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def language_params
-      params.require(:language).permit(:language_name)
+      params.require(:language).permit(:language_name, dialect_attributes: [ :dialect_name])
     end
 end

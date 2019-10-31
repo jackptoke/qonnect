@@ -15,6 +15,7 @@ class DialectsController < ApplicationController
   # GET /dialects/new
   def new
     @dialect = Dialect.new
+    @languages = Language.all
   end
 
   # GET /dialects/1/edit
@@ -61,10 +62,19 @@ class DialectsController < ApplicationController
     end
   end
 
+  # Get the dialects of a language
+  # def get_dialects_by_language
+  #   @dialects = DDialect.where(language_id: params[:language_id])
+  #   respond_to do |format|
+  #     format.json { render :json => @dialects }
+  #   end
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dialect
       @dialect = Dialect.find(params[:id])
+      @languages = Language.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

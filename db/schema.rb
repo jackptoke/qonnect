@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_062823) do
+ActiveRecord::Schema.define(version: 2019_10_30_205339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +36,11 @@ ActiveRecord::Schema.define(version: 2019_10_30_062823) do
 
   create_table "interpreter_languages", force: :cascade do |t|
     t.bigint "interpreter_id", null: false
-    t.bigint "language_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "dialect_id", null: false
+    t.index ["dialect_id"], name: "index_interpreter_languages_on_dialect_id"
     t.index ["interpreter_id"], name: "index_interpreter_languages_on_interpreter_id"
-    t.index ["language_id"], name: "index_interpreter_languages_on_language_id"
   end
 
   create_table "interpreters", force: :cascade do |t|
@@ -70,6 +70,6 @@ ActiveRecord::Schema.define(version: 2019_10_30_062823) do
 
   add_foreign_key "addresses", "interpreters"
   add_foreign_key "dialects", "languages"
+  add_foreign_key "interpreter_languages", "dialects"
   add_foreign_key "interpreter_languages", "interpreters"
-  add_foreign_key "interpreter_languages", "languages"
 end
