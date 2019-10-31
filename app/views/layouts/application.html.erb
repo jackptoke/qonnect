@@ -17,7 +17,9 @@
 
   <body>
     <%= render 'layouts/nav' %>
+    <% if current_interpreter %>
     <%= render 'layouts/subnav1' %>
+    <% end %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     
