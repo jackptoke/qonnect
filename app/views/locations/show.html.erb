@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+<div class="container jumbotron">
+<p>
+  <strong>Client:</strong>
+  <%= @location.client_id %>
+</p>
+
+<p>
+  <strong>Building info:</strong>
+  <%= @location.building_info %>
+</p>
+
+<p>
+  <strong>Street address:</strong>
+  <%= @location.street_address %>
+</p>
+
+<p>
+  <strong>Suburb:</strong>
+  <%= @location.suburb %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @location.state %>
+</p>
+
+<p>
+  <strong>Postcode:</strong>
+  <%= @location.postcode %>
+</p>
+
+<p>
+  <strong>Is billing address:</strong>
+  <%= @location.is_billing_address %>
+</p>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
+</div>

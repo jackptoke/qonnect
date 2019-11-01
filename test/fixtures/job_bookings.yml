@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  appointment_time: 2019-11-01 11:01:39
+  booking_length: 1
+  booking_title: MyString
+  booking_description: MyText
+  further_instruction: MyText
+  contact_person: MyString
+  contact_no: MyString
+  number_of_interpreter: 1
+  job_status: 1
+  cost: 9.99
+  payment_status: 1
+  payment_reference: MyString
+  client: one
+  address: one
+
+two:
+  appointment_time: 2019-11-01 11:01:39
+  booking_length: 1
+  booking_title: MyString
+  booking_description: MyText
+  further_instruction: MyText
+  contact_person: MyString
+  contact_no: MyString
+  number_of_interpreter: 1
+  job_status: 1
+  cost: 9.99
+  payment_status: 1
+  payment_reference: MyString
+  client: two
+  address: two

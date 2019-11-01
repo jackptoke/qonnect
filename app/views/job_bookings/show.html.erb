@@ -1,0 +1,76 @@
+<p id="notice"><%= notice %></p>
+<div class="container jumbotron">
+<p>
+  <strong>Appointment time:</strong>
+  <%= @job_booking.appointment_time %>
+</p>
+
+<p>
+  <strong>Booking length:</strong>
+  <%= @job_booking.booking_length %>
+</p>
+
+<p>
+  <strong>Booking title:</strong>
+  <%= @job_booking.booking_title %>
+</p>
+
+<p>
+  <strong>Booking description:</strong>
+  <%= @job_booking.booking_description %>
+</p>
+
+<p>
+  <strong>Further instruction:</strong>
+  <%= @job_booking.further_instruction %>
+</p>
+
+<p>
+  <strong>Contact person:</strong>
+  <%= @job_booking.contact_person %>
+</p>
+
+<p>
+  <strong>Contact no:</strong>
+  <%= @job_booking.contact_no %>
+</p>
+
+<p>
+  <strong>Number of interpreter:</strong>
+  <%= @job_booking.number_of_interpreter %>
+</p>
+
+<p>
+  <strong>Job status:</strong>
+  <%= @job_booking.job_status %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @job_booking.cost %>
+</p>
+
+<p>
+  <strong>Payment status:</strong>
+  <%= @job_booking.payment_status %>
+</p>
+
+<p>
+  <strong>Payment reference:</strong>
+  <%= @job_booking.payment_reference %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @job_booking.client_id %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @job_booking.address_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_booking_path(@job_booking) %> |
+<%= link_to 'Back', job_bookings_path %>
+
+</div>

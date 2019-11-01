@@ -1,0 +1,103 @@
+<%= form_with(model: job_booking, local: true) do |form| %>
+  <% if job_booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job_booking.errors.count, "error") %> prohibited this job_booking from being saved:</h2>
+
+      <ul>
+        <% job_booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :appointment_time %><br>
+    <!--
+    <%= form.date_select :appointment_time %>
+    -->
+    <%= form.datetime_select :appointment_time %> 
+    
+  </div>
+
+  <div class="field">
+    <%= form.label :dialect_id, "Language" %><br>
+    <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).all.map{|d| [d.dialect_name + " - " + d.language.language_name, d.id]}, :prompt => "Select Language", class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_of_interpreter %>
+    <%= form.number_field :number_of_interpreter, value: 1, min: 1, max: 20, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_id %> <%= link_to 'New Location', new_location_path %><br>
+    <%= form.select :address_id, Location.where(client_id: current_client.id).map{|l| [l.building_info + ", " + l.street_address + ", " + l.suburb + ", " + l.state + ", " + l.postcode, l.id]}, :prompt => "Select Address", class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :booking_length, "Booking Length (minutes)" %><br>
+    <%= form.number_field :booking_length, value: 90, min:90, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :booking_title %>
+    <%= form.text_field :booking_title, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :booking_description %>
+    <%= form.text_area :booking_description, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :further_instruction %>
+    <%= form.text_area :further_instruction, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_person %>
+    <%= form.text_field :contact_person, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_no %>
+    <%= form.text_field :contact_no, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job_status %>
+    <%= form.select :job_status, JobBooking.job_statuses.keys, {}, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost, disabled: true, class: "form-control"   %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_status %>
+    <%= form.select :payment_status, JobBooking.payment_statuses.keys, {}, disabled: true %>
+  </div>
+
+  <% if @job_booking.job_status == JobBooking.job_statuses[:COMPLETED] %>
+     <div class="field">
+    <%= form.label :payment_reference %>
+    <%= form.text_field :payment_reference, class: "form-control"  %>
+  </div>
+  <% else %>
+  <div class="field">
+    <%= form.label :payment_reference %>
+    <%= form.text_field :payment_reference, disabled: true, class: "form-control"  %>
+  </div>
+  <% end %>
+
+  <%= form.hidden_field :client_id, value: current_client.id, disabled: true, class: "form-control"  %>
+  
+
+  
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

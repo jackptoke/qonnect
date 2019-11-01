@@ -1,0 +1,2 @@
+module JobBookingsHelper
+end

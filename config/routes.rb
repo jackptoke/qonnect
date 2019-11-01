@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :interpreters, :controllers => { registrations: 'interpreters/registrations' }
+  resources :job_bookings
+  devise_for :clients, path: 'clients', controllers: {
+    sessions: 'clients/sessions', registrations: 'clients/registrations' 
+  }
+  devise_for :interpreters, path: 'interpreters', controllers: { 
+    sessions: 'clients/sessions', registrations: 'interpreters/registrations'
+  }
+  # devise_for :clients
   resources :interpreters
   resources :addresses
   root to: "homes#index"
@@ -8,4 +15,5 @@ Rails.application.routes.draw do
   resources :interpreter_languages
   resources :languages
   resources :dialects
+  resources :locations
 end
