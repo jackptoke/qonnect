@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Booked Interpreters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job booking</th>
+      <th>Interpreter</th>
+      <th>Time interpreter arrived</th>
+      <th>Time interpreter started</th>
+      <th>Time interpreter finished</th>
+      <th>Interpreter remark</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @booked_interpreters.each do |booked_interpreter| %>
+      <tr>
+        <td><%= booked_interpreter.job_booking_id %></td>
+        <td><%= booked_interpreter.interpreter_id %></td>
+        <td><%= booked_interpreter.time_interpreter_arrived %></td>
+        <td><%= booked_interpreter.time_interpreter_started %></td>
+        <td><%= booked_interpreter.time_interpreter_finished %></td>
+        <td><%= booked_interpreter.interpreter_remark %></td>
+        <td><%= link_to 'Show', booked_interpreter %></td>
+        <td><%= link_to 'Edit', edit_booked_interpreter_path(booked_interpreter) %></td>
+        <td><%= link_to 'Destroy', booked_interpreter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Booked Interpreter', new_booked_interpreter_path %>

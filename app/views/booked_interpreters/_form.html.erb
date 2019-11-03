@@ -1,0 +1,47 @@
+<%= form_with(model: booked_interpreter, local: true) do |form| %>
+  <% if booked_interpreter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booked_interpreter.errors.count, "error") %> prohibited this booked_interpreter from being saved:</h2>
+
+      <ul>
+        <% booked_interpreter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :job_booking_id %>
+    <%= form.text_field :job_booking_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :interpreter_id %>
+    <%= form.text_field :interpreter_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_interpreter_arrived %>
+    <%= form.datetime_select :time_interpreter_arrived %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_interpreter_started %>
+    <%= form.datetime_select :time_interpreter_started %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_interpreter_finished %>
+    <%= form.datetime_select :time_interpreter_finished %>
+  </div>
+
+  <div class="field">
+    <%= form.label :interpreter_remark %>
+    <%= form.text_area :interpreter_remark %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

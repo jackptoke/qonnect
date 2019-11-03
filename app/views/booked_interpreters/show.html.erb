@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Job booking:</strong>
+  <%= @booked_interpreter.job_booking_id %>
+</p>
+
+<p>
+  <strong>Interpreter:</strong>
+  <%= @booked_interpreter.interpreter_id %>
+</p>
+
+<p>
+  <strong>Time interpreter arrived:</strong>
+  <%= @booked_interpreter.time_interpreter_arrived %>
+</p>
+
+<p>
+  <strong>Time interpreter started:</strong>
+  <%= @booked_interpreter.time_interpreter_started %>
+</p>
+
+<p>
+  <strong>Time interpreter finished:</strong>
+  <%= @booked_interpreter.time_interpreter_finished %>
+</p>
+
+<p>
+  <strong>Interpreter remark:</strong>
+  <%= @booked_interpreter.interpreter_remark %>
+</p>
+
+<%= link_to 'Edit', edit_booked_interpreter_path(@booked_interpreter) %> |
+<%= link_to 'Back', booked_interpreters_path %>

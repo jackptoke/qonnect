@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<div class="container jumbotron">
+    <table class="table-striped table-hover" width="100%">
+        <tr>
+            <th>Interpreter Detail</th>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Name: <strong><%= @interpreter.first_name + " " + @interpreter.last_name %></strong>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Rating: <strong><%= @interpreter.rating_score %></strong></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Sex: <strong><%= @interpreter.sex %></strong></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Fees: <strong><%= number_to_currency(@interpreter.payment_rate) %></strong> per 90 minutes</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><%= link_to "Book this interpreter", book_an_interpreter_path(:interpreter_id => @interpreter.id, :job_booking_id => @job_booking.id), method: :post, data: { confirm: "Confirm booking, #{@interpreter.first_name} #{@interpreter.last_name}?" }, class: 'btn btn-primary' %> | <%= link_to "Back", @job_booking, class: 'btn btn-primary' %></td>
+        </tr>
+    </table>
+</div>

@@ -2,10 +2,10 @@
 <div class="container jumbotron form-group">
 <h1>Locations</h1>
 
-<table class="table-striped">
+<table class="table-striped table-hover" width="100%">
   <thead>
     <tr>
-      <th>Client</th>
+      <th>ID</th>
       <th>Building info</th>
       <th>Street address</th>
       <th>Suburb</th>
@@ -19,7 +19,7 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= location.client_id %></td>
+        <td><%= location.id %></td>
         <td><%= location.building_info %></td>
         <td><%= location.street_address %></td>
         <td><%= location.suburb %></td>

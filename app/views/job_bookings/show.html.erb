@@ -1,5 +1,18 @@
 <p id="notice"><%= notice %></p>
 <div class="container jumbotron">
+
+<table>
+  <tr>
+    <th>Available Interpreters</th>
+  </tr>
+  <% @job_booking.available_interpreters.each do |ai| %>
+    <tr>
+      <td><%= link_to ai.interpreter.first_name + " " + ai.interpreter.last_name, myinterpreter_path(:interpreter_id => ai.interpreter.id, :job_booking_id => @job_booking.id) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br>
 <p>
   <strong>Appointment time:</strong>
   <%= @job_booking.appointment_time %>

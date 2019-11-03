@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Interpreter:</strong>
+  <%= @available_interpreter.interpreter_id %>
+</p>
+
+<p>
+  <strong>Job booking:</strong>
+  <%= @available_interpreter.job_booking_id %>
+</p>
+
+<%= link_to 'Edit', edit_available_interpreter_path(@available_interpreter) %> |
+<%= link_to 'Back', available_interpreters_path %>

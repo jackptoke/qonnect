@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_035613) do
+ActiveRecord::Schema.define(version: 2019_11_03_045238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,28 @@ ActiveRecord::Schema.define(version: 2019_11_01_035613) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "interpreter_id", null: false
     t.index ["interpreter_id"], name: "index_addresses_on_interpreter_id"
+  end
+
+  create_table "available_interpreters", force: :cascade do |t|
+    t.bigint "interpreter_id", null: false
+    t.bigint "job_booking_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["interpreter_id"], name: "index_available_interpreters_on_interpreter_id"
+    t.index ["job_booking_id"], name: "index_available_interpreters_on_job_booking_id"
+  end
+
+  create_table "booked_interpreters", force: :cascade do |t|
+    t.bigint "job_booking_id", null: false
+    t.bigint "interpreter_id", null: false
+    t.datetime "time_interpreter_arrived"
+    t.datetime "time_interpreter_started"
+    t.datetime "time_interpreter_finished"
+    t.text "interpreter_remark"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["interpreter_id"], name: "index_booked_interpreters_on_interpreter_id"
+    t.index ["job_booking_id"], name: "index_booked_interpreters_on_job_booking_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -87,10 +109,10 @@ ActiveRecord::Schema.define(version: 2019_11_01_035613) do
     t.text "further_instruction"
     t.string "contact_person"
     t.string "contact_no"
-    t.integer "number_of_interpreter", default: 1
-    t.integer "job_status", default: 0
-    t.decimal "cost", default: 65
-    t.integer "payment_status", default: false
+    t.integer "number_of_interpreter"
+    t.integer "job_status"
+    t.decimal "cost"
+    t.integer "payment_status"
     t.string "payment_reference"
     t.bigint "client_id", null: false
     t.bigint "address_id", null: false
@@ -122,6 +144,10 @@ ActiveRecord::Schema.define(version: 2019_11_01_035613) do
   end
 
   add_foreign_key "addresses", "interpreters"
+  add_foreign_key "available_interpreters", "interpreters"
+  add_foreign_key "available_interpreters", "job_bookings"
+  add_foreign_key "booked_interpreters", "interpreters"
+  add_foreign_key "booked_interpreters", "job_bookings"
   add_foreign_key "dialects", "languages"
   add_foreign_key "interpreter_languages", "dialects"
   add_foreign_key "interpreter_languages", "interpreters"

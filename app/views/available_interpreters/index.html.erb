@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Available Interpreters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Interpreter</th>
+      <th>Job booking</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @available_interpreters.each do |available_interpreter| %>
+      <tr>
+        <td><%= available_interpreter.interpreter_id %></td>
+        <td><%= available_interpreter.job_booking_id %></td>
+        <td><%= link_to 'Show', available_interpreter %></td>
+        <td><%= link_to 'Edit', edit_available_interpreter_path(available_interpreter) %></td>
+        <td><%= link_to 'Destroy', available_interpreter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Available Interpreter', new_available_interpreter_path %>

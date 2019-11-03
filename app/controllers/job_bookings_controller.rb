@@ -1,10 +1,27 @@
 class JobBookingsController < ApplicationController
-  before_action :set_job_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_job_booking, only: [:show, :edit, :update, :destroy, :cancel]
 
   # GET /job_bookings
   # GET /job_bookings.json
   def index
-    @job_bookings = JobBooking.where(client_id: current_client.id)
+    # @job_bookings = JobBooking.where(client_id: current_client.id, )
+    @job_bookings = JobBooking.where("client_id = ? AND job_status < 4", current_client.id)
+  end
+
+  def available
+    dialects = InterpreterLanguage.where("interpreter_id = ? ", current_interpreter.id).pluck(:dialect_id)
+    @job_bookings = JobBooking.where("dialect_id IN (?) AND job_status < 4", dialects)
+    # byebug
+  end
+  
+  def past_bookings
+    @job_bookings = JobBooking.where("client_id = ? AND job_status >= 4", current_client.id)
+  end
+
+  def myinterpreter
+    @interpreter = Interpreter.find(params[:interpreter_id])
+    @job_booking = JobBooking.find(params[:job_booking_id])
+    @booked_interpreter = BookedInterpreter.new(job_booking_id: params[:job_booking_id], interpreter_id: params[:interpreter_id])
   end
 
   # GET /job_bookings/1
@@ -36,6 +53,21 @@ class JobBookingsController < ApplicationController
         format.json { render :show, status: :created, location: @job_booking }
       else
         format.html { render :new }
+        format.json { render json: @job_booking.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  #cancel the booking
+  def cancel
+    @job_booking.job_status = 4
+    # byebug
+    respond_to do |format|
+      if @job_booking.save
+        format.html { redirect_to @job_booking, notice: 'Job booking was successfully updated.' }
+        format.json { render :show, status: :ok, location: @job_booking }
+      else
+        format.html { render :edit }
         format.json { render json: @job_booking.errors, status: :unprocessable_entity }
       end
     end

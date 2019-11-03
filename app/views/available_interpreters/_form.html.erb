@@ -1,0 +1,27 @@
+<%= form_with(model: available_interpreter, local: true) do |form| %>
+  <% if available_interpreter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(available_interpreter.errors.count, "error") %> prohibited this available_interpreter from being saved:</h2>
+
+      <ul>
+        <% available_interpreter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :interpreter_id %>
+    <%= form.text_field :interpreter_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job_booking_id %>
+    <%= form.text_field :job_booking_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

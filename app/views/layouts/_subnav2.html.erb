@@ -6,11 +6,11 @@
     </li>
 
     <li class="nav-item">
-      <%= link_to 'Current booking', "/interpreters", class: "nav-link" %>
+      <%= link_to 'Current booking', job_bookings_path, class: "nav-link" %>
     </li>
 
     <li class="nav-item">
-      <%= link_to 'Booking History', "/interpreters", class: "nav-link" %>
+      <%= link_to 'Past Bookings', pastbookings_path, class: "nav-link" %>
     </li>
    <% if current_client && Location.find_by_client_id(current_client.id).nil? %>
     <li class="nav-item">

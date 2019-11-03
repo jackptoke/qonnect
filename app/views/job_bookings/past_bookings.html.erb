@@ -25,12 +25,6 @@
         <td align="center"><%= job_booking.number_of_interpreter %></td>
         <td><%= job_booking.job_status %></td>
         <td><%= link_to 'Show', job_booking %></td>
-        
-        <td><%= link_to 'Edit', edit_job_booking_path(job_booking) %></td>
-        <td>  
-        <%= link_to "Cancel", booking_cancel_path(:id => job_booking.id), method: :patch, data: { confirm: 'Are you sure?' } %>
-        </td>
-        
       </tr>
     <% end %>
   </tbody>
