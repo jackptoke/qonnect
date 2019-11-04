@@ -29,7 +29,7 @@ class DialectsController < ApplicationController
     # byebug
     respond_to do |format|
       if @dialect.save
-        format.html { redirect_to @dialect, notice: 'Dialect was successfully created.' }
+        format.html { redirect_to dialects_path, notice: 'Dialect was successfully created.' }
         format.json { render :show, status: :created, location: @dialect }
       else
         format.html { render :new }

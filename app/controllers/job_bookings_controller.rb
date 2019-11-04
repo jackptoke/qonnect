@@ -9,8 +9,10 @@ class JobBookingsController < ApplicationController
   end
 
   def available
+    #retrieve all the language that the interpreter offers
     dialects = InterpreterLanguage.where("interpreter_id = ? ", current_interpreter.id).pluck(:dialect_id)
-    @job_bookings = JobBooking.where("dialect_id IN (?) AND job_status < 4", dialects)
+    #retrieve all the jobs that are still available
+    @job_bookings = JobBooking.where("dialect_id IN (?) AND job_status < 4 AND job_status <> 2", dialects)
     # byebug
   end
   

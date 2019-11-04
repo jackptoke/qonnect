@@ -1,34 +1,101 @@
 <p id="notice"><%= notice %></p>
-
+<div class="container jumbotron form-group">
 <p>
-  <strong>Job booking:</strong>
+  <strong>Job #:</strong>
   <%= @booked_interpreter.job_booking_id %>
 </p>
 
 <p>
   <strong>Interpreter:</strong>
-  <%= @booked_interpreter.interpreter_id %>
+  <%= @booked_interpreter.interpreter.first_name + " " + @booked_interpreter.interpreter.last_name %>
+</p>
+
+<p>
+  <strong>Appointment Date and Time:</strong>
+  <%= @booked_interpreter.job_booking.appointment_time.to_formatted_s(:short) %>
+</p>
+
+<p>
+  <strong>Job Location:</strong>
+  <%= @address.street_address + ", " + @address.suburb + ", " + @address.state + ", " + @address.postcode %>
+</p>
+
+<p>
+  <strong>Contact Person:</strong>
+  <%= @booked_interpreter.job_booking.contact_person %>
+</p>
+
+<p>
+  <strong>Contact Number:</strong>
+  <%= @booked_interpreter.job_booking.contact_no %>
+</p>
+
+<p>
+  <strong>Job Description:</strong>
+  <%= @booked_interpreter.job_booking.booking_description %>
+</p>
+
+<p>
+  <strong>Further Instruction:</strong>
+  <%= @booked_interpreter.job_booking.further_instruction %>
 </p>
 
 <p>
   <strong>Time interpreter arrived:</strong>
-  <%= @booked_interpreter.time_interpreter_arrived %>
+  <% if !@booked_interpreter.time_interpreter_arrived %>
+    <%= link_to "Arrived", interpreter_arrived_path(:id => @booked_interpreter.id), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary'  %>
+  <% elsif @booked_interpreter.time_interpreter_arrived %>
+    <%= @booked_interpreter.time_interpreter_arrived.to_formatted_s(:short) %>
+  <% end %>
 </p>
 
 <p>
   <strong>Time interpreter started:</strong>
-  <%= @booked_interpreter.time_interpreter_started %>
+  <% if !@booked_interpreter.time_interpreter_started && @booked_interpreter.time_interpreter_arrived %>
+    <%= link_to "Start", interpreter_started_path(:id => @booked_interpreter.id), method: :patch, data: { confirm: 'Confirm to start the job?' }, class: 'btn btn-primary'  %>
+  <% elsif @booked_interpreter.time_interpreter_started %>
+    <%= @booked_interpreter.time_interpreter_started.to_formatted_s(:short) %>
+  <% end %>
 </p>
 
 <p>
   <strong>Time interpreter finished:</strong>
-  <%= @booked_interpreter.time_interpreter_finished %>
+  <% if !@booked_interpreter.time_interpreter_finished && @booked_interpreter.time_interpreter_started %>
+    <%= link_to "Finish", interpreter_finished_path(:id => @booked_interpreter.id), method: :patch, data: { confirm: 'Confirm that the job is fnished?' }, class: 'btn btn-primary'  %>
+  <% elsif @booked_interpreter.time_interpreter_finished %>
+    <%= @booked_interpreter.time_interpreter_finished.to_formatted_s(:short) %>
+  <% end %>
 </p>
 
-<p>
-  <strong>Interpreter remark:</strong>
-  <%= @booked_interpreter.interpreter_remark %>
-</p>
+<% if @booked_interpreter.interpreter_remark %>
+  <p>
+    <strong>Time interpreter started:</strong>
+    <%= @booked_interpreter.interpreter_remark %>
+  </p>
+<% else %>
 
-<%= link_to 'Edit', edit_booked_interpreter_path(@booked_interpreter) %> |
+<%= form_with(url: interpreter_remark_path) do |form| %>
+  <% if @booked_interpreter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booked_interpreter.errors.count, "error") %> prohibited this booked_interpreter from being saved:</h2>
+
+      <ul>
+        <% @booked_interpreter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.hidden_field :id, value: "#{@booked_interpreter.id}", class: "form-control" %>
+  <div class="field">
+    <%= form.label :interpreter_remark %>
+    <%= form.text_area :interpreter_remark, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <% end %>
+<% end %>
 <%= link_to 'Back', booked_interpreters_path %>
+</div>

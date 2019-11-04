@@ -9,7 +9,10 @@
       <%= link_to 'Available jobs', available_jobs_path, class: "nav-link" %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Current jobs', "/interpreters", class: "nav-link" %>
+      <%= link_to 'Current jobs', booked_interpreters_path, class: "nav-link" %>
+    </li>
+     <li class="nav-item">
+      <%= link_to 'Past jobs', interpreter_past_bookings_path, class: "nav-link" %>
     </li>
     <li class="nav-item">
       <%= link_to 'My availability', "/interpreters", class: "nav-link" %>

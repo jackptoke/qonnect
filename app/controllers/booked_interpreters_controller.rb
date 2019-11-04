@@ -1,14 +1,74 @@
 class BookedInterpretersController < ApplicationController
-  before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy]
+  before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy, :arrived, :started, :finished, :remark, :update_job_status]
 
+  
   # GET /booked_interpreters
   def index
-    @booked_interpreters = BookedInterpreter.all
+    # byebug
+    @booked_interpreters = BookedInterpreter.where("interpreter_id = ? AND time_interpreter_finished IS ?", current_interpreter.id, nil )
+    #
+  end
+
+  def past
+    @booked_interpreters = BookedInterpreter.where("interpreter_id = ?", current_interpreter.id )
   end
 
   # GET /booked_interpreters/1
   def show
+    @address = @booked_interpreter.job_booking.address
   end
+
+  def arrived
+    @booked_interpreter.time_interpreter_arrived = DateTime.current
+    if @booked_interpreter.save
+      redirect_to @booked_interpreter, notice: 'Interpreter arrival time was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def started
+    @booked_interpreter.time_interpreter_started = DateTime.current
+    if @booked_interpreter.save
+      redirect_to @booked_interpreter, notice: 'Your job starting time has be recorded.'
+    else
+      render :edit
+    end
+  end
+
+  def finished
+    success = false
+    @booked_interpreter.time_interpreter_finished = DateTime.current
+
+    if  @booked_interpreter.save
+      num_unfinished_bookings = BookedInterpreter.where(job_booking_id: @booked_interpreter.job_booking_id, time_interpreter_finished: nil).count
+      message = 'Your job is completed.'
+      if num_unfinished_bookings == 0
+        @booked_interpreter.job_booking.job_status = 5
+        if  @booked_interpreter.job_booking.save
+          message = 'Your job is completed and booking status updated.'
+        end
+      end
+      redirect_to @booked_interpreter, notice: message
+    else
+      render @booked_interpreter
+    end
+  end
+
+ 
+
+  def remark
+    success = false
+    permitted = params.permit(:interpreter_remark, :id)
+
+    if @booked_interpreter.update!(permitted)
+      redirect_to @booked_interpreter, notice: 'Interpreter remark was successfully added.'
+    else
+      render @booked_interpreter
+    end
+
+  end
+
 
   # GET /booked_interpreters/new
   def new

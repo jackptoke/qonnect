@@ -15,7 +15,7 @@
 
   <tbody>
     <% @booked_interpreters.each do |booked_interpreter| %>
-      <% if ["PARTIALLY_ASSIGNED", "ASSIGNED"].include?(booked_interpreter.job_booking.job_status) %>
+      <% if ["COMPLETED", "CANCELED"].include?(booked_interpreter.job_booking.job_status) %>
         <tr>
         <td><%= booked_interpreter.job_booking.appointment_time.to_formatted_s(:short)  %></td>
         <td><%= booked_interpreter.job_booking.booking_title %></td>
