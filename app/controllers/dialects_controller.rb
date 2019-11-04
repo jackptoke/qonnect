@@ -26,7 +26,7 @@ class DialectsController < ApplicationController
   # POST /dialects.json
   def create
     @dialect = Dialect.new(dialect_params)
-
+    # byebug
     respond_to do |format|
       if @dialect.save
         format.html { redirect_to @dialect, notice: 'Dialect was successfully created.' }
@@ -64,7 +64,7 @@ class DialectsController < ApplicationController
 
   # Get the dialects of a language
   # def get_dialects_by_language
-  #   @dialects = DDialect.where(language_id: params[:language_id])
+  #   @dialects = Dialect.where(language_id: params[:language_id])
   #   respond_to do |format|
   #     format.json { render :json => @dialects }
   #   end
