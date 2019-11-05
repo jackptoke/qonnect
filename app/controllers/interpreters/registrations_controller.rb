@@ -2,7 +2,7 @@
 
 class Interpreters::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:edit, :update]
 
   # GET /resource/sign_up
   def new
@@ -20,8 +20,8 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
+    @interpreter.address = Address.new()
     super
-
   end
 
   # PUT /resource
@@ -49,12 +49,12 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :abn, :mobile, :sex, :payment_rate, :rating_score])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :abn, :mobile, :sex, :payment_rate, :rating_score, :avatar])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :first_name, :last_name, :abn, :mobile, :sex, :payment_rate, :rating_score])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :first_name, :last_name, :abn, :mobile, :sex, :payment_rate, :rating_score, :avatar])
   end
 
   # The path used after sign up.

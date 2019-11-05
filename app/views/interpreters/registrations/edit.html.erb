@@ -32,6 +32,13 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  
+  <div class="field">
+    <% if @interpreter.avatar.attached? %>
+      <%= image_tag @interpreter.avatar, class: "avatar"  %>
+    <% end %>
+  </div>
+
   <div class="field">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
@@ -60,6 +67,12 @@
   <div class="field">
     <%= f.label :payment_rate %><br />
     <%= f.text_field :payment_rate %>
+  </div>
+
+  <div>
+    <%= f.label :avatar %> 
+    <%= f.file_field :avatar, accept:
+    'image/png,image/gif,image/jpeg,image/jpg' %>
   </div>
 
   <div class="actions">

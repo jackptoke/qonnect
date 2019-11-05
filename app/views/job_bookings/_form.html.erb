@@ -31,8 +31,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :address_id %> <%= link_to 'New Location', new_location_path %><br>
-    <%= form.select :address_id, Location.where(client_id: current_client.id).map{|l| [l.building_info + ", " + l.street_address + ", " + l.suburb + ", " + l.state + ", " + l.postcode, l.id]}, :prompt => "Select Address", class: "form-control"  %>
+    <%= form.label :location_id %> <%= link_to 'New Location', new_location_path %><br>
+    <%= form.select :location_id, Location.where(client_id: current_client.id).map{|l| [l.building_info + ", " + l.street_address + ", " + l.suburb + ", " + l.state + ", " + l.postcode, l.id]}, :prompt => "Select Address", class: "form-control"  %>
   </div>
 
   <div class="field">

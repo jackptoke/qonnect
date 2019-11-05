@@ -1,6 +1,6 @@
 class JobBooking < ApplicationRecord
   belongs_to :client
-  belongs_to :address
+  belongs_to :location
   belongs_to :dialect
   has_many :booked_interpreters, autosave: true
   has_many :available_interpreters

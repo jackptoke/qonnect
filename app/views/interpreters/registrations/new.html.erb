@@ -52,6 +52,11 @@
     <%= f.text_field :payment_rate %>
   </div>
 
+  <div>
+    <%= f.label :avatar %> <%= form.file_field :avatar, accept:
+    'image/png,image/gif,image/jpeg,image/jpg' %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up", class: 'btn btn-primary'  %>
   </div>

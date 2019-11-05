@@ -59,3 +59,5 @@ gem 'jquery-rails'
 gem 'bootstrap'
 gem 'momentjs-rails'
 gem 'bootstrap4-datetime-picker-rails'
+
+gem "aws-sdk-s3", "~> 1.53"

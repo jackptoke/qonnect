@@ -75,12 +75,12 @@
 
 <p>
   <strong>Client:</strong>
-  <%= @job_booking.client_id %>
+  <%= @job_booking.client.organisation_name %>
 </p>
 
 <p>
   <strong>Address:</strong>
-  <%= @job_booking.address_id %>
+  <%= @job_booking.location.building_info + " " + @job_booking.location.street_address + " " + @job_booking.location.suburb + " " + @job_booking.location.state + " " + @job_booking.location.postcode %>
 </p>
 
 <%= link_to 'Edit', edit_job_booking_path(@job_booking) %> |
