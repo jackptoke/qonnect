@@ -47,7 +47,7 @@ class JobBookingsController < ApplicationController
     @job_booking.client_id = current_client.id
     @job_booking.job_status = 0
     @job_booking.payment_status = 0
-    @job_booking.cost = calculate_cost(@job_booking.booking_length)
+    @job_booking.cost = calculate_cost(@job_booking)
 
     respond_to do |format|
       if @job_booking.save
@@ -78,6 +78,7 @@ class JobBookingsController < ApplicationController
   # PATCH/PUT /job_bookings/1
   # PATCH/PUT /job_bookings/1.json
   def update
+    @job_booking.cost = calculate_cost(@job_booking)
     respond_to do |format|
       if @job_booking.update(job_booking_params)
         format.html { redirect_to @job_booking, notice: 'Job booking was successfully updated.' }
@@ -110,10 +111,13 @@ class JobBookingsController < ApplicationController
       params.require(:job_booking).permit(:appointment_time, :booking_length, :booking_title, :booking_description, :further_instruction, :contact_person, :contact_no, :number_of_interpreter, :job_status, :cost, :payment_status, :payment_reference, :client_id, :address_id, :dialect_id)
     end
 
-    def calculate_cost(time_minutes)
-      rate = 80
-      overtime = time_minutes - 90
-      ot_cost = (overtime/15.0).ceil * (rate/4)
-      return (ot_cost + rate)
+    def calculate_cost(job_booking)
+      total = 0.0
+      job_booking.booked_interpreters.each do |bi|
+        rate = bi.interpreter.payment_rate
+        overtime = job_booking.booking_length - 90
+        total += (overtime/15.0).ceil * (rate/4) + rate
+      end
+      return total
     end
 end

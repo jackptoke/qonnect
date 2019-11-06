@@ -24,7 +24,12 @@
             <td>Fees: <strong><%= number_to_currency(@interpreter.payment_rate) %></strong> per 90 minutes</td>
         </tr>
         <tr>
-            <td><%= link_to "Book this interpreter", book_an_interpreter_path(:interpreter_id => @interpreter.id, :job_booking_id => @job_booking.id), method: :post, data: { confirm: "Confirm booking, #{@interpreter.first_name} #{@interpreter.last_name}?" }, class: 'btn btn-primary' %> | <%= link_to "Back", @job_booking, class: 'btn btn-primary' %></td>
+            <td>
+            <% if !@job_booking.booked_interpreters.pluck(:interpreter_id).include?(@interpreter.id) %>
+            <%= link_to "Book this interpreter", book_an_interpreter_path(:interpreter_id => @interpreter.id, :job_booking_id => @job_booking.id), method: :post, data: { confirm: "Confirm booking, #{@interpreter.first_name} #{@interpreter.last_name}?" }, class: 'btn btn-primary' %> | 
+            <% end %>
+            <%= link_to "Back", @job_booking, class: 'btn btn-primary' %>
+            </td>
         </tr>
     </table>
 </div>

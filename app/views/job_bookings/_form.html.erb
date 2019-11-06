@@ -10,34 +10,51 @@
       </ul>
     </div>
   <% end %>
-
+  <% num_interpreter_booked = @job_booking.booked_interpreters.count %>
   <div class="field">
     <%= form.label :appointment_time %><br>
-    <!--
-    <%= form.date_select :appointment_time %>
-    -->
-    <%= form.datetime_select :appointment_time %> 
-    
+    <% if num_interpreter_booked == 0 %>
+      <%= form.datetime_select :appointment_time %>
+    <% else %>
+      <%= form.datetime_select :appointment_time, disabled: true%>
+    <% end %> 
   </div>
 
   <div class="field">
     <%= form.label :dialect_id, "Language" %><br>
-    <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).all.map{|d| [d.dialect_name + " - " + d.language.language_name, d.id]}, :prompt => "Select Language", class: "form-control"  %>
+    <% if num_interpreter_booked == 0 %>
+      <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).all.map{|d| [d.dialect_name + " - " + d.language.language_name, d.id]}, :prompt => "Select Language", class: "form-control"  %>
+    <% else %>
+      <%= form.text_field :dialect_id, value: @job_booking.dialect.dialect_name, disabled: true, class: "form-control" %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :number_of_interpreter %>
+    <% if num_interpreter_booked == 0 %>
     <%= form.number_field :number_of_interpreter, value: 1, min: 1, max: 20, class: "form-control"  %>
+    <% else %>
+     <%= form.number_field :number_of_interpreter, value: 1, min: 1, max: 20, class: "form-control", disabled: true  %>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= form.label :location_id %> <%= link_to 'New Location', new_location_path %><br>
+    <%= form.label :location_id %> 
+    <% if num_interpreter_booked == 0 %>
+    <%= link_to 'New Location', new_location_path %><br>
     <%= form.select :location_id, Location.where(client_id: current_client.id).map{|l| [l.building_info + ", " + l.street_address + ", " + l.suburb + ", " + l.state + ", " + l.postcode, l.id]}, :prompt => "Select Address", class: "form-control"  %>
+    <% else %>
+    <%= form.text_field :location_id, value: @job_booking.location.building_info + ", " + @job_booking.location.street_address + ", " + @job_booking.location.suburb + ", " + @job_booking.location.state + ", " + @job_booking.location.postcode, disabled: true, class: "form-control" %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :booking_length, "Booking Length (minutes)" %><br>
+    <% if num_interpreter_booked == 0 %>
     <%= form.number_field :booking_length, value: 90, min:90, class: "form-control" %>
+    <% else %>
+    <%= form.number_field :booking_length, value: 90, min:90, class: "form-control", disabled: true %>
+    <% end %>
   </div>
 
   <div class="field">

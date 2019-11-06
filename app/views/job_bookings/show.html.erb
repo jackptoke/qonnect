@@ -1,18 +1,39 @@
+<% if !current_client %>
+  <% redirect_to root_path %>
+<% end %>
 <p id="notice"><%= notice %></p>
 <div class="container jumbotron">
 
 <table>
-  <tr>
-    <th>Available Interpreters</th>
-  </tr>
-  <% @job_booking.available_interpreters.each do |ai| %>
+  <% if @job_booking.available_interpreters.count > 0 %>
     <tr>
-      <td><%= link_to ai.interpreter.first_name + " " + ai.interpreter.last_name, myinterpreter_path(:interpreter_id => ai.interpreter.id, :job_booking_id => @job_booking.id) %>
-      </td>
+      <th>Available Interpreters</th>
     </tr>
+    <% @job_booking.available_interpreters.each do |ai| %>
+      <tr>
+        <td><%= link_to ai.interpreter.first_name + " " + ai.interpreter.last_name, myinterpreter_path(:interpreter_id => ai.interpreter.id, :job_booking_id => @job_booking.id) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% if @job_booking.booked_interpreters.count > 0 %>
+    <tr>
+      <th>Booked Interpreter</th>
+    </tr>
+    <% @job_booking.booked_interpreters.each do |bi| %>
+      <tr>
+        <td><%= link_to bi.interpreter.first_name + " " + bi.interpreter.last_name, myinterpreter_path(:interpreter_id => bi.interpreter.id, :job_booking_id => @job_booking.id) %>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 <br>
+<p>
+  <strong>Language/Dialect:</strong>
+  <%= @job_booking.dialect.language.language_name + "|" + @job_booking.dialect.dialect_name %>
+</p>
 <p>
   <strong>Appointment time:</strong>
   <%= @job_booking.appointment_time %>
@@ -82,8 +103,9 @@
   <strong>Address:</strong>
   <%= @job_booking.location.building_info + " " + @job_booking.location.street_address + " " + @job_booking.location.suburb + " " + @job_booking.location.state + " " + @job_booking.location.postcode %>
 </p>
-
+<% if !["COMPLETED", "CANCELED"].include?(@job_booking.job_status) && @job_booking.booked_interpreters.count == 0 %>
 <%= link_to 'Edit', edit_job_booking_path(@job_booking) %> |
+<% end %>
 <%= link_to 'Back', job_bookings_path %>
 
 </div>
