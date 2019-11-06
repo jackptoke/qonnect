@@ -72,8 +72,8 @@
     <strong>Time interpreter started:</strong>
     <%= @booked_interpreter.interpreter_remark %>
   </p>
-<% else %>
-
+<% elsif @booked_interpreter.time_interpreter_finished %>
+<!-- if @booked_interpreter.time_interpreter_finished -->
 <%= form_with(url: interpreter_remark_path) do |form| %>
   <% if @booked_interpreter.errors.any? %>
     <div id="error_explanation">
@@ -91,11 +91,18 @@
     <%= form.label :interpreter_remark %>
     <%= form.text_area :interpreter_remark, class: "form-control" %>
   </div>
-
+<!-- 
+  <div class="field">
+    <%= form.label :signature %>
+    <%= form.signature_field :signature %>
+  </div>
+  -->
+  
   <div class="actions">
     <%= form.submit %>
   </div>
   <% end %>
 <% end %>
 <%= link_to 'Back', booked_interpreters_path %>
+
 </div>

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="container jumbotron">
-<h1>Booked Interpreters</h1>
+<h1>Current Booking</h1>
 
 <table width="100%">
   <thead>
@@ -19,7 +19,7 @@
         <tr>
         <td><%= booked_interpreter.job_booking.appointment_time.to_formatted_s(:short)  %></td>
         <td><%= booked_interpreter.job_booking.booking_title %></td>
-        <td><%= booked_interpreter.job_booking.address.suburb %></td>
+        <td><%= booked_interpreter.job_booking.location.suburb %></td>
         <td><%= booked_interpreter.job_booking.client.organisation_name %></td>
         <td><%= link_to 'Show', booked_interpreter %></td>
       </tr>

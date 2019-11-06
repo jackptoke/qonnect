@@ -15,12 +15,11 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-   
   end
 
   # GET /resource/edit
   def edit
-    @interpreter.address = Address.new()
+    # @interpreter.address = Address.new()
     super
   end
 
@@ -45,7 +44,7 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
@@ -66,6 +65,10 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def after_update_path_for(resource)
+    edit_interpreter_registration_path(resource)
+  end
 
  
 end

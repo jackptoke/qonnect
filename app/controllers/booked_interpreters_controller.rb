@@ -1,5 +1,5 @@
 class BookedInterpretersController < ApplicationController
-  before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy, :arrived, :started, :finished, :remark, :update_job_status]
+  before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy, :arrived, :started, :finished, :remark]
 
   
   # GET /booked_interpreters
@@ -15,7 +15,8 @@ class BookedInterpretersController < ApplicationController
 
   # GET /booked_interpreters/1
   def show
-    @address = @booked_interpreter.job_booking.address
+    @address = @booked_interpreter.job_booking.location
+    
   end
 
   def arrived
@@ -62,7 +63,7 @@ class BookedInterpretersController < ApplicationController
     permitted = params.permit(:interpreter_remark, :id)
 
     if @booked_interpreter.update!(permitted)
-      redirect_to @booked_interpreter, notice: 'Interpreter remark was successfully added.'
+      redirect_to @booked_interpreter, notice: 'Interpreter remark and client signature was successfully added.'
     else
       render @booked_interpreter
     end
