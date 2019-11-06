@@ -81,7 +81,13 @@
 
 <p>
   <strong>Cost:</strong>
-  <%= @job_booking.cost %>
+  <%= @job_booking.cost %> 
+  <% if @job_booking.payment_status != "PAID" && @job_booking.job_status != "CANCELED" %>
+    <button data-stripe="payment">
+    Pay <%= number_to_currency(@job_booking.cost) %>
+    </button>
+  <% end %>
+
 </p>
 
 <p>
@@ -103,9 +109,28 @@
   <strong>Address:</strong>
   <%= @job_booking.location.building_info + " " + @job_booking.location.street_address + " " + @job_booking.location.suburb + " " + @job_booking.location.state + " " + @job_booking.location.postcode %>
 </p>
+
 <% if !["COMPLETED", "CANCELED"].include?(@job_booking.job_status) && @job_booking.booked_interpreters.count == 0 %>
 <%= link_to 'Edit', edit_job_booking_path(@job_booking) %> |
 <% end %>
 <%= link_to 'Back', job_bookings_path %>
 
 </div>
+
+<!--Stripe Payment Related -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
+<!-- Stripe Payment End -->

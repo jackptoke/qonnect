@@ -29,6 +29,27 @@ class JobBookingsController < ApplicationController
   # GET /job_bookings/1
   # GET /job_bookings/1.json
   def show
+    session = Stripe::Checkout::Session.create(
+            payment_method_types:['card'],
+            customer_email: current_client.email,
+            line_items: [{
+                name: @job_booking.booking_title,
+                description: @job_booking.booking_description,
+                amount: (@job_booking.cost * 100).to_i,
+                currency: 'aud',
+                quantity: 1
+            }],
+            payment_intent_data: {
+                metadata: {
+                    client_id: current_client.id,
+                    job_booking_id: @job_booking.id
+                }
+            },
+            success_url: "#{root_url}payments/success?client_id=#{current_client.id}&job_booking_id=#{@job_booking.id}&amount=#{@job_booking.cost}&currency=AUD", 
+            cancel_url: "#{root_url}job_bookings"
+        )
+        @session_id = session.id
+
   end
 
   # GET /job_bookings/new
