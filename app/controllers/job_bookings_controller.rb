@@ -1,4 +1,5 @@
 class JobBookingsController < ApplicationController
+  before_action :authenticate_user
   before_action :set_job_booking, only: [:show, :edit, :update, :destroy, :cancel]
 
   # GET /job_bookings
@@ -29,29 +30,32 @@ class JobBookingsController < ApplicationController
   # GET /job_bookings/1
   # GET /job_bookings/1.json
   def show
+    # byebug
     session = Stripe::Checkout::Session.create(
             payment_method_types:['card'],
             customer_email: current_client.email,
             line_items: [{
                 name: @job_booking.booking_title,
                 description: @job_booking.booking_description,
-                amount: (@job_booking.cost * 100).to_i,
+                amount: (@job_booking.cost * 100).to_i, 
                 currency: 'aud',
                 quantity: 1
             }],
             payment_intent_data: {
                 metadata: {
                     client_id: current_client.id,
-                    job_booking_id: @job_booking.id
+                    job_booking_id: @job_booking.id, 
+                    reference_no: "INV-JB#{@job_booking.id}C#{current_client.id}"
                 }
             },
-            success_url: "#{root_url}payments/success?client_id=#{current_client.id}&job_booking_id=#{@job_booking.id}&amount=#{@job_booking.cost}&currency=AUD", 
+            success_url: "#{root_url}payments/success?client_id=#{current_client.id}&job_booking_id=#{@job_booking.id}&amount=1&currency=AUD&reference_no=INV-JB#{@job_booking.id}C#{current_client.id}", 
             cancel_url: "#{root_url}job_bookings"
         )
         @session_id = session.id
-
   end
-
+#,
+  # 
+  # 
   # GET /job_bookings/new
   def new
     @job_booking = JobBooking.new
@@ -129,7 +133,7 @@ class JobBookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_booking_params
-      params.require(:job_booking).permit(:appointment_time, :booking_length, :booking_title, :booking_description, :further_instruction, :contact_person, :contact_no, :number_of_interpreter, :job_status, :cost, :payment_status, :payment_reference, :client_id, :address_id, :dialect_id)
+      params.require(:job_booking).permit(:appointment_time, :booking_length, :booking_title, :booking_description, :further_instruction, :contact_person, :contact_no, :number_of_interpreter, :job_status, :cost, :payment_status, :payment_reference, :client_id, :location_id, :dialect_id)
     end
 
     def calculate_cost(job_booking)
@@ -138,6 +142,9 @@ class JobBookingsController < ApplicationController
         rate = bi.interpreter.payment_rate
         overtime = job_booking.booking_length - 90
         total += (overtime/15.0).ceil * (rate/4) + rate
+      end
+      if total == 0
+        total = 90
       end
       return total
     end

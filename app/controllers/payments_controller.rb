@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+    before_action :authenticate_user
     skip_before_action :verify_authenticity_token, only: [:webhook]
 
     def success
@@ -6,6 +7,7 @@ class PaymentsController < ApplicationController
         @client = params[:client_id]
         @job_booking = JobBooking.find(params[:job_booking_id])
         @job_booking.payment_status = 3
+        @job_booking.payment_reference = params[:reference_no]
 
         if @job_booking.save
             @message = "Job Booking record is successfully updated."

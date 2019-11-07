@@ -1,4 +1,5 @@
 class InterpreterLanguagesController < ApplicationController
+  before_action :authenticate_user
   before_action :set_interpreter_language, only: [:show, :edit, :update, :destroy]
 
   # GET /interpreter_languages

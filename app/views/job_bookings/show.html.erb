@@ -82,7 +82,7 @@
 <p>
   <strong>Cost:</strong>
   <%= @job_booking.cost %> 
-  <% if @job_booking.payment_status != "PAID" && @job_booking.job_status != "CANCELED" %>
+  <% if @job_booking.payment_status != "PAID" && @job_booking.job_status != "CANCELED" && @job_booking.booked_interpreters.count > 0 %>
     <button data-stripe="payment">
     Pay <%= number_to_currency(@job_booking.cost) %>
     </button>

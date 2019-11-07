@@ -1,4 +1,5 @@
 class BookedInterpretersController < ApplicationController
+  before_action :authenticate_user
   before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy, :arrived, :started, :finished, :remark]
 
   

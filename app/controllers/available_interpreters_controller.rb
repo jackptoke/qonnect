@@ -1,4 +1,6 @@
 class AvailableInterpretersController < ApplicationController
+  before_action :authenticate_user
+
   before_action :set_available_interpreter, only: [:show, :edit, :update, :destroy]
 
   # GET /available_interpreters

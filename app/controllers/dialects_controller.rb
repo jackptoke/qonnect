@@ -1,4 +1,5 @@
 class DialectsController < ApplicationController
+  before_action :authenticate_user
   before_action :set_dialect, only: [:show, :edit, :update, :destroy]
 
   # GET /dialects
