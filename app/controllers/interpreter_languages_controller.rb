@@ -5,12 +5,17 @@ class InterpreterLanguagesController < ApplicationController
   # GET /interpreter_languages
   # GET /interpreter_languages.json
   def index
+    if true
+      redirect_to root_path, :flash => { :error => "Insufficient rights!" }
+    end
     @interpreter_languages = InterpreterLanguage.all
   end
 
   def my_languages
     if current_interpreter
       @my_dialects = InterpreterLanguage.where(interpreter_id: current_interpreter.id)
+    else
+        redirect_to root_path, :flash => { :error => "Insufficient rights!" }
     end
   end
 

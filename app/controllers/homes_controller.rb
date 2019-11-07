@@ -6,4 +6,7 @@ class HomesController < ApplicationController
             end
         end
     end
+
+    def no_page
+    end
 end

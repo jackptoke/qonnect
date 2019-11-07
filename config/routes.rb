@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :interpreters
   resources :addresses
   root to: "homes#index"
+  get "/homes/no_page", to: "homes#no_page"
   get "my_languages", to: "interpreter_languages#my_languages", as: "my_languages"
 
   post "/payments/webhook", to: "payments#webhook"
@@ -34,4 +35,6 @@ Rails.application.routes.draw do
   resources :dialects
   resources :locations
   resources :available_interpreters
+
+  get '*path', to: "homes#no_page", :flash => { :error => "Page doesn't exist!" }
 end

@@ -66,14 +66,15 @@ body {
   text-align: center;
  }
 
- .error-message {
-   color: red;
-   font-family: 'Courier New', Courier, monospace;
-   font-weight: 900;
+ .error-notice {
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #dfffdf;
+    border-color: #9fcf9f;
+    color: #005f00;
  }
 
- .notice-message {
-  color: lightgreen;
+ .good-notice {
+  color: rgb(0, 124, 0);
   font-family: 'Courier New', Courier, monospace;
-  font-weight: 900;
  }

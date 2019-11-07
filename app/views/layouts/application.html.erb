@@ -26,8 +26,10 @@
       <%= render 'layouts/subnav2' %>
     <% end %>
      <!-- <p class="notice"><%= notice %></p> -->
-      <p class="alert"><%= alert %></p>
-    
+     <div class="notice-board">
+      <p class="error-notice"><%= flash[:error] %></p>
+      <p class="good-notice"><%= flash[:notice] %></p>
+    </div>
     <%= yield %>
   </body>
 </html>

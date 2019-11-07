@@ -1,12 +1,12 @@
 class AddressesController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_interpreter!
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   # GET /addresses
   # GET /addresses.json
   def index
-    if current_interpreter
-      redirect_to root_path
+    if !(current_interpreter)
+      redirect_to root_path, :flash => { :error => "Insufficient rights!" }
     end
     @addresses = Address.all
   end
