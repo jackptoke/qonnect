@@ -18,8 +18,8 @@ class Client < ApplicationRecord
   }
 
   validates :acn, format: {
-    with: /^[0-9]{9}|[0-9]{11}|([0-9]{3}[-][0-9]{3}[-][0-9]{3})|([0-9]{2}[-][0-9]{3}[-][0-9]{3}[-][0-9]{3})$/,
-    message: "Alphabet and some symbols ('.', '-') only"
+    with: /\A([0-9]{9}|[0-9]{3}[-][0-9]{3}[-][0-9]{3})\z/,
+    message: "9 digits number only or xxx-xxx-xxx"
   }
 
   validates :telephone_no, :mobile_no, format: {

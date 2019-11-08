@@ -19,15 +19,16 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    # @interpreter.address = Address.new()
+   
     super
+    @interpreter = Interpreter.find(params[:id])
+    byebug
   end
 
   # PUT /resource
   def update
     # @interpreter = Interpreter.new(configure_sign_up_params)
     super
-
   end
 
   # DELETE /resource

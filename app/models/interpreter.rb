@@ -11,13 +11,8 @@ class Interpreter < ActiveRecord::Base
 
   has_one_attached :avatar    
   
-  validates :contact_person, format: {
-    with: /\A([a-zA-Z]+[-]?[a-zA-Z]+[.]?\s?)+\z/,
-    message: "Alphabet and some symbols ('.', '-') only"
-  }
-
   validates :abn, format: {
-    with: /^[0-9]{11}|([0-9]{2}[-][0-9]{3}[-][0-9]{3}[-][0-9]{3})$/,
-    message: "Alphabet and some symbols ('.', '-') only"
+    with: /\A([0-9]{11}|[0-9]{2}[-][0-9]{3}[-][0-9]{3}[-][0-9]{3})\z/,
+    message: "11 digits and number only or xx-xxx-xxx-xxx"
   }
 end

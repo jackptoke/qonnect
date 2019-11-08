@@ -36,5 +36,5 @@ Rails.application.routes.draw do
   resources :locations
   resources :available_interpreters
 
-  get '*path', to: "homes#no_page", :flash => { :error => "Page doesn't exist!" }
+  # get '*path', to: "homes#no_page", :flash => { :error => "Page doesn't exist!" }
 end

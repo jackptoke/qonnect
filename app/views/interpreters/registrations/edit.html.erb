@@ -32,13 +32,12 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <% if @interpreter.avatar.attached? %>
+    <div class="field">
+        <%= image_tag url_for(@interpreter.avatar), class: "avatar"  %>
+    </div>
+  <% end %>
   
-  <div class="field">
-    <% if @interpreter.avatar.attached? %>
-      <%= image_tag @interpreter.avatar, class: "avatar"  %>
-    <% end %>
-  </div>
-
   <div>
     <%= f.label :avatar %> 
     <%= f.file_field :avatar, accept:
