@@ -23,7 +23,7 @@
   <div class="field">
     <%= form.label :dialect_id, "Language" %><br>
     <% if num_interpreter_booked == 0 %>
-      <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).all.map{|d| [d.dialect_name + " - " + d.language.language_name, d.id]}, :prompt => "Select Language", class: "form-control"  %>
+      <%= form.select :dialect_id, Dialect.order(dialect_name: :asc).joins(:interpreter_languages).all.map{|d| [d.dialect_name + " - " + d.language.language_name, d.id]}, :prompt => "Select Language", class: "form-control"  %>
     <% else %>
       <%= form.text_field :dialect_id, value: @job_booking.dialect.dialect_name, disabled: true, class: "form-control" %>
     <% end %>
