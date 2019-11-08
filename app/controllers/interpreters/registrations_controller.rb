@@ -22,7 +22,7 @@ class Interpreters::RegistrationsController < Devise::RegistrationsController
    
     super
     @interpreter = Interpreter.find(params[:id])
-    byebug
+    # byebug
   end
 
   # PUT /resource

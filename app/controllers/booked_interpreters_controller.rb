@@ -1,6 +1,6 @@
 class BookedInterpretersController < ApplicationController
   before_action :authenticate_user
-  before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy, :arrived, :started, :finished, :remark]
+  before_action :set_booked_interpreter, only: [:show, :edit, :update, :destroy, :arrived, :started, :finished, :remark, :return]
 
   
   # GET /booked_interpreters
@@ -57,7 +57,19 @@ class BookedInterpretersController < ApplicationController
     end
   end
 
- 
+  def return
+    ActiveRecord::Base.transaction do
+      @job_booking = JobBooking.find(@booked_interpreter.job_booking_id)
+      @job_booking.job_status = 3
+      @job_booking.save
+      
+      if @booked_interpreter.destroy
+        redirect_to booked_interpreters_path, notice: "You have successfully returned job ##{@job_booking.id}."
+      else
+        render @booked_interpreter, error: 'Failed to return job.'
+      end
+    end
+  end
 
   def remark
     success = false
@@ -66,7 +78,7 @@ class BookedInterpretersController < ApplicationController
     if @booked_interpreter.update!(permitted)
       redirect_to @booked_interpreter, notice: 'Interpreter remark and client signature was successfully added.'
     else
-      render @booked_interpreter
+      render @booked_interpreter, notice: 'Failed to add the remark.'
     end
 
   end

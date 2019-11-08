@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <div class="container jumbotron">
 <h1>Current Booking</h1>
 
@@ -21,7 +20,8 @@
         <td><%= booked_interpreter.job_booking.booking_title %></td>
         <td><%= booked_interpreter.job_booking.location.suburb %></td>
         <td><%= booked_interpreter.job_booking.client.organisation_name %></td>
-        <td><%= link_to 'Show', booked_interpreter %></td>
+        <td><%= link_to 'Show', booked_interpreter %> | <%= link_to "Return job", interpreter_return_job_path(:id => booked_interpreter.id), method: :patch, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
       <% end %>
     <% end %>

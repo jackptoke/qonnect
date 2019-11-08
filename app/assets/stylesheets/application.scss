@@ -71,10 +71,17 @@ body {
     font-family: 'Courier New', Courier, monospace;
     background-color: #dfffdf;
     border-color: #9fcf9f;
-    color: #005f00;
+    font-size: 1.5em;
  }
 
  .good-notice {
   color: rgb(0, 124, 0);
   font-family: 'Courier New', Courier, monospace;
+  background-color: #dfffdf;
+  border-color: #9fcf9f;
+  font-size: 1.5em;
+ }
+
+ .notice-board{
+   margin-left: 55px;
  }

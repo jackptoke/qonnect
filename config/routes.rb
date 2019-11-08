@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   patch 'booked_interpreters/:id/arrived' => 'booked_interpreters#arrived', as: :interpreter_arrived
   patch 'booked_interpreters/:id/started' => 'booked_interpreters#started', as: :interpreter_started
   patch 'booked_interpreters/:id/finished' => 'booked_interpreters#finished', as: :interpreter_finished
+  patch 'booked_interpreters/:id/return' => 'booked_interpreters#return', as: :interpreter_return_job
   resources :job_bookings
 
   devise_for :clients, path: 'clients', controllers: {
