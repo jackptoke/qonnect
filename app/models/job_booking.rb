@@ -14,4 +14,8 @@ class JobBooking < ApplicationRecord
     with: /[0][2-9][0-9]{8}/,
     message: "Contact number starts with '0' and a length of 10 digits"
   }
+  validates :contact_person, format: {
+    with: /\A([a-zA-Z]+[-]?[a-zA-Z]+[.]?\s?)+\z/,
+    message: "Alphabet and some symbols ('.', '-') only"
+  }
 end
