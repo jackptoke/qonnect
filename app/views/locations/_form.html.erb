@@ -12,8 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :client_id %>
-    <%= form.text_field :client_id, readonly: true, value: current_client.id %>
+    <%= form.hidden_field :client_id, readonly: true, value: current_client.id %>
   </div>
 
   <div class="field">

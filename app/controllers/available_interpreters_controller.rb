@@ -43,7 +43,7 @@ class AvailableInterpretersController < ApplicationController
     end
 
     if @available_interpreter.save
-      redirect_to available_jobs_path, notice: 'Your available was successfully noted.'
+      redirect_to available_jobs_path, notice: 'Your availability was successfully recorded.'
     else
       render available_jobs_path
     end
