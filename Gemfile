@@ -62,6 +62,4 @@ gem 'bootstrap4-datetime-picker-rails'
 
 gem "aws-sdk-s3", "~> 1.53"
 
-gem 'john_hancock'
-
 gem "stripe", "~> 5.8"

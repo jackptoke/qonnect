@@ -26,5 +26,4 @@ class Client < ApplicationRecord
     with: /[0][2-9][0-9]{8}/,
     message: "Contact number starts with '0' and has a length of 10 digits"
   }
-
 end
